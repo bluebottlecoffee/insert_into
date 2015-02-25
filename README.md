@@ -11,7 +11,7 @@ one transaction.
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'insert-into'
+gem 'insert-into', require: 'insert_into'
 ```
 
 And then execute:
