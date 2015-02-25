@@ -57,7 +57,9 @@ people_attributes.each do |person|  # where `people_attributes` is an array of a
 end
 ```
 
-If you'd like to specify the return columns, you can do so using `returning`:
+Note that the input values are not sanitized, so user input should not be
+directly passed here.  If you'd like to specify the return columns, you can do so
+using `returning`:
 
 ```ruby
 insert = InsertInto::Statement.new('people')
