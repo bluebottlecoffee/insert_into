@@ -8,9 +8,9 @@ Gem::Specification.new do |spec|
   spec.version       = InsertInto::VERSION
   spec.authors       = ["Greggory Rothmeier"]
   spec.email         = ["greggroth@gmail.com"]
-  spec.summary       = %q{TODO: Write a short summary. Required.}
-  spec.description   = %q{TODO: Write a longer description. Optional.}
-  spec.homepage      = ""
+  spec.summary       = %q{Simple DSL for multi-row SQL INSERT statements}
+  spec.description   = %q{Simple DSL for multi-row SQL INSERT statements}
+  spec.homepage      = "https://github.com/bluebottlecoffee/insert_into"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files -z`.split("\x0")
