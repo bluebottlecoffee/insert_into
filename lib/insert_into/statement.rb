@@ -13,8 +13,12 @@ module InsertInto
       @rows << row
     end
 
+    def returning(statement)
+      @returning = statement
+    end
+
     def to_sql
-      "INSERT INTO #{table_name} (#{column_names.join(',')}) VALUES #{values_string};"
+      "INSERT INTO #{table_name} (#{column_names.join(',')}) VALUES #{values_string}#{returning_values};"
     end
 
     private
@@ -27,6 +31,10 @@ module InsertInto
       @rows.map do |row|
         "(#{formatted_row(row)})"
       end.join(',')
+    end
+
+    def returning_values
+      " RETURNING #{@returning}" if @returning
     end
 
     def formatted_row(row)

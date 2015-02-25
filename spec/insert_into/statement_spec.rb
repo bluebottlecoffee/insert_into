@@ -1,14 +1,13 @@
 require 'insert_into'
 
 describe InsertInto::Statement do
+  subject(:insert) { described_class.new('people') }
+
   it 'takes a table name' do
-    insert = described_class.new('people')
     expect(insert.table_name).to eq('people')
   end
 
   describe '#new_row' do
-    subject(:insert) { described_class.new('people') }
-
     it 'creates a new set of values for an insert' do
       insert.new_row do |r|
         r.name 'Gregg'
@@ -72,6 +71,17 @@ describe InsertInto::Statement do
       end
 
       expect(insert.to_sql).to eq("INSERT INTO people (name,age) VALUES ('Gregg',NULL),(NULL,27);")
+    end
+  end
+
+  describe '#returning' do
+    it 'accepts a SQL string' do
+      insert.new_row do |r|
+        r.name 'Gregg'
+      end
+      insert.returning('name')
+
+      expect(insert.to_sql).to eq("INSERT INTO people (name) VALUES ('Gregg') RETURNING name;")
     end
   end
 end

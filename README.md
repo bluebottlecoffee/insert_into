@@ -57,6 +57,21 @@ people_attributes.each do |person|  # where `people_attributes` is an array of a
 end
 ```
 
+If you'd like to specify the return columns, you can do so using `returning`:
+
+```ruby
+insert = InsertInto::Statement.new('people')
+
+insert.new_row do |r|
+  r.name 'Gregg'
+end
+
+insert.returning('name')
+
+insert.to_sql
+#> "INSERT INTO people (name) VALUES ('Gregg') RETURNING name;"
+```
+
 ## Contributing
 
 1. Fork it (https://github.com/bluebottlecoffee/insert_into)
