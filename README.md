@@ -11,7 +11,7 @@ one transaction.
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'insert_into'
+gem 'insert-into'
 ```
 
 And then execute:
@@ -20,7 +20,7 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install insert_into
+    $ gem install insert-into
 
 ## Usage
 

@@ -4,7 +4,7 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'insert_into/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = "insert_into"
+  spec.name          = "insert-into"
   spec.version       = InsertInto::VERSION
   spec.authors       = ["Greggory Rothmeier"]
   spec.email         = ["greggroth@gmail.com"]
