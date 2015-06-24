@@ -18,12 +18,12 @@ module InsertInto
     end
 
     def to_sql
-      "INSERT INTO #{table_name} (#{column_names.join(',')}) VALUES #{values_string}#{returning_values};"
+      "INSERT INTO #{table_name} (#{all_column_names.join(',')}) VALUES #{values_string}#{returning_values};"
     end
 
     private
 
-    def column_names
+    def all_column_names
       @rows.flat_map(&:column_names).uniq
     end
 
@@ -38,23 +38,19 @@ module InsertInto
     end
 
     def formatted_row(row)
-      all_column_names.map do |col|
-        v = row[col]
-
-        if v.nil?
-          "NULL"
-        elsif v.kind_of?(String)
-          "\'#{v}\'"
-        elsif v.kind_of?(Hash)
-          "$JSON$#{JSON.generate(v)}$JSON$"
-        else
-          v
-        end
-      end.join(',')
+      all_column_names.map { |col| formatted_value(row[col]) }.join(',')
     end
 
-    def all_column_names
-      @rows.flat_map(&:column_names).uniq
+    def formatted_value(v)
+      if v.nil?
+        "NULL"
+      elsif v.kind_of?(String)
+        "\'#{v}\'"
+      elsif v.kind_of?(Hash)
+        "$JSON$#{JSON.generate(v)}$JSON$"
+      else
+        v
+      end
     end
   end
 end
